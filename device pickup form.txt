@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Repair Pickup Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .signature {
+            border-bottom: 1px solid #000;
+            padding-top: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #otherIssueInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Device Repair Pickup Form</h1>
+
+    <form id="repairForm">
+        <label for="storeName">Store Name:</label>
+        <select id="storeName" name="storeName">
+            <option value="CashifySilchar">Cashify Silchar Store</option>
+            <!-- Add more store options as needed -->
+        </select>
+
+        <label for="dateTime">Date & Time:</label>
+        <input type="datetime-local" id="dateTime" name="dateTime" required>
+
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" name="customerName" required>
+
+        <label for="customerMobile">Customer Mobile Number:</label>
+        <input type="tel" id="customerMobile" name="customerMobile" required>
+
+        <label for="customerAddress">Customer Address:</label>
+        <textarea id="customerAddress" name="customerAddress" required></textarea>
+
+        <label for="deviceBrand">Device Brand:</label>
+        <input type="text" id="deviceBrand" name="deviceBrand" required>
+
+        <label for="deviceName">Device Name:</label>
+        <input type="text" id="deviceName" name="deviceName" required>
+
+        <label for="deviceColor">Device Color:</label>
+        <select id="deviceColor" name="deviceColor">
+            <option value="Black">Black</option>
+            <option value="Red">Red</option>
+            <option value="White">White</option>
+            <option value="Green">Green</option>
+            <option value="Blue">Blue</option>
+        </select>
+
+        <label for="deviceCondition">Device Physical Condition:</label>
+        <input type="text" id="deviceCondition" name="deviceCondition" required>
+
+        <label for="suspectedIssue">Suspected Issue:</label>
+        <input type="text" id="suspectedIssue" name="suspectedIssue" placeholder="In Case of Unable to Check">
+
+        <label for="problemStatement">Problem Statement:</label>
+        <select id="problemStatement" name="problemStatement" onchange="handleProblemStatementChange()" multiple>
+            <option value="A">Unable to check - Devices not powering on or stuck on logo</option>
+            <option value="B">Screen</option>
+            <option value="C">Battery</option>
+            <option value="D">Mic</option>
+            <option value="E">Aux Jack</option>
+            <option value="F">Proximity Sensor</option>
+            <option value="G">Charging Jack</option>
+            <option value="H">Receiver</option>
+            <option value="I">Speaker</option>
+            <option value="J">Other</option>
+        </select>
+
+        <div id="otherIssueInput">
+            <label for="otherIssue">Other Issue:</label>
+            <input type="text" id="otherIssue" name="otherIssue">
+        </div>
+
+        <label for="resolutionTime">Last Estimated Time of Resolution:</label>
+        <input type="text" id="resolutionTime" name="resolutionTime">
+
+        <label for="repairCost">Estimated Repair Cost:</label>
+        <input type="text" id="repairCost" name="repairCost">
+
+        <p>Note: It is strongly recommended to take a complete backup & wipe off any data from the device before handover, as Cashify will not be responsible for any data loss that might occur during repair.</p>
+
+        <label for="customerSignature">Customer Signature:</label>
+        <div class="signature"></div>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+        function handleProblemStatementChange() {
+            var otherIssueInput = document.getElementById('otherIssueInput');
+            var problemStatement = document.getElementById('problemStatement');
+            var otherIssue = document.getElementById('otherIssue');
+
+            if (Array.from(problemStatement.selectedOptions).some(option => option.value === 'J')) {
+                otherIssueInput.style.display = 'block';
+                otherIssue.setAttribute('required', 'required');
+            } else {
+                otherIssueInput.style.display = 'none';
+                otherIssue.removeAttribute('required');
+            }
+        }
+
+        function submitForm() {
+            // You can add validation and submission logic here
+            alert("Form submitted successfully!");
+        }
+    </script>
+
+</body>
+</html>
